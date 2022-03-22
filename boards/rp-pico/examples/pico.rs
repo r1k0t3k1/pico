@@ -133,13 +133,23 @@ fn main() -> ! {
 
     // Move the cursor up and down every 200ms
     loop {
-        delay.delay_ms(1000);
+        delay.delay_ms(100);
 
         let key = KeyboardReport {
             modifier: 0,
             reserved: 0,
             leds: 0,
-            keycodes: [0x04,0x05,0,0,0,0],
+            keycodes: [0x04,0,0,0,0,0],
+        };
+        push_key(key).ok().unwrap_or(0);
+
+        delay.delay_ms(100);
+
+        let key = KeyboardReport {
+            modifier: 0,
+            reserved: 0,
+            leds: 0,
+            keycodes: [0,0,0,0,0,0],
         };
         push_key(key).ok().unwrap_or(0);
     }
